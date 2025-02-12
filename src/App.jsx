@@ -46,14 +46,6 @@ const [zombieFighters, setZombieFighters] = useState([
     img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/4b2900.png',
   },
   {
-    id: 6,
-    name: 'Medic',
-    price: 15,
-    strength: 5,
-    agility: 7,
-    img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/5a1e02.png',
-  },
-  {
     id: 7,
     name: 'Engineer',
     price: 16,
@@ -88,12 +80,27 @@ const [zombieFighters, setZombieFighters] = useState([
 ])
 
 
+function handleAddFighter(fighter){
+
+  const newFighters = zombieFighters.filter((fighter)=>{
+    return fighter.id !== 10
+  })
+
+  setZombieFighters(newFighters)
+  setTeam([...zombieFighters, fighter])
+  console.log(setTeam)
+
+
+
+}
+
+
   return (
     <>
      <h2>All Zombie Fighters</h2>
 
      {zombieFighters.map((oneZombie)=>
-      <div>
+      <div key={oneZombie.name}>
         <ul>
           <li>{oneZombie.img}</li>
           <li>{oneZombie.name}</li>
@@ -102,9 +109,17 @@ const [zombieFighters, setZombieFighters] = useState([
           <li>{oneZombie.agility}</li>
           <br/>
         </ul>
+        <button onClick={()=>{handleAddFighter({
+          img: oneZombie.img,
+          name: oneZombie.name,
+          price: oneZombie.price,
+          strength: oneZombie.strength,
+          agility: oneZombie,
+        })}}>Add to your team</button>
       </div>
     )}
 
+    <p>Money: {money}</p>
 
     </>
   )
